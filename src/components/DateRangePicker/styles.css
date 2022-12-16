@@ -1,9 +1,9 @@
 .module-container {
   display: flex;
   height: 340px;
-  width: 400px;
+  width: fit-content;
   font-family: inherit;
-  font-size: 13px;
+  font-size: medium;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: absolute;
@@ -17,7 +17,6 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  /* background-color: #22ccce; */
   align-items: center;
   padding-top: 0.5rem;
 }
@@ -107,11 +106,10 @@
 }
 
 .calendar-header {
-  display: flex;
+  display: grid;
   width: 100%;
+  grid-template-columns: repeat(7, 1fr);
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
   margin-bottom: 0.5rem;
 }
 
@@ -123,11 +121,9 @@
 }
 
 .day-label {
-  width: 24px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 800;
+  justify-self: center;
+  font-weight: bold;
   color: var(--davys-grey);
 }
 
@@ -158,19 +154,32 @@
 
 .day-of-current-month:hover {
   color: var(--platinum);
+  font-size: small;
 }
 
-.selected-date {
+.day-number-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #22ccce;
-  border-radius: 100px;
-  color: white;
+  z-index: 99;
+  background-color: transparent;
   width: 28px;
   height: 28px;
   border-radius: 100px;
+  border-width: 1px;
+  border-color: transparent;
+  border-style: solid;
 }
+
+.selected-day {
+  background-color: #22ccce;
+  color: white;
+}
+
+.today {
+  border-color: #22ccce;
+}
+
 .date-picker-container {
   display: flex;
   flex: 2;
@@ -180,12 +189,6 @@
 @media screen and (max-width: 768px) {
   .quick-ranges-container {
     display: none;
-  }
-  .module-container {
-    width: fit-content;
-  }
-  .date-picker-container {
-    max-width: 266.672px;
   }
 }
 

@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {days} from '../../constants/days';
+import {today} from '../../constants/today';
 import {DaysInMonthDetails} from '../../types';
 
 export interface ICalendarProps {
@@ -75,12 +76,6 @@ const Calendar: FC<ICalendarProps> = ({
             <div
               key={index}
               onClick={() => onClickDay(currDayTimeStamp)}
-              // onMouseEnter={
-              //   isCurrentMonth
-              //     ? () => handleMouseEnter(currDayTimeStamp)
-              //     : undefined
-              // }
-              //   onMouseLeave={isCurrentMonth ? handleMouseLeave : undefined}
               className={dayClass}
               style={{
                 borderTopLeftRadius: day.dayOfWeek == 0 ? 100 : 0,
@@ -104,11 +99,14 @@ const Calendar: FC<ICalendarProps> = ({
               ></div>
               <div
                 className={
-                  (isStartDate || isEndDate) && isCurrentMonth
-                    ? ' selected-date'
-                    : ''
+                  ' day-number-wrapper ' +
+                  (currDayTimeStamp == today.setHours(0, 0, 0, 0)
+                    ? ' today '
+                    : ' ') +
+                  ((isStartDate || isEndDate) && isCurrentMonth
+                    ? ' selected-day '
+                    : ' ')
                 }
-                style={{position: 'relative', zIndex: 5}}
               >
                 <span>{day.dateNumber}</span>
               </div>
