@@ -8,13 +8,12 @@ import {
 } from '../helpers';
 
 interface IDayProps {
-  index: number;
   onClickDay: (value: number) => void;
   day: DaysInMonthDetails;
   startDate: number;
   endDate?: number;
 }
-const Day: FC<IDayProps> = ({index, onClickDay, day, startDate, endDate}) => {
+const Day: FC<IDayProps> = ({onClickDay, day, startDate, endDate}) => {
   const currDayTimestamp = day.timestamp;
   const todayTimestamp = today.setHours(0, 0, 0, 0);
   const isCurrentMonth = day.monthStatus === 0;
@@ -52,7 +51,6 @@ const Day: FC<IDayProps> = ({index, onClickDay, day, startDate, endDate}) => {
 
   return (
     <div
-      key={index}
       onClick={() => onClickDay(day.timestamp)}
       className={dayClass}
       style={{

@@ -17,9 +17,9 @@ const CalendarGrid: FC<ICalendarProps> = ({
 }) => {
   return (
     <div className="calendar-grid">
-      {daysInMonth?.map((day: DaysInMonthDetails, index: number) => (
+      {daysInMonth?.map((day, index) => (
         <Day
-          index={index}
+          key={index}
           onClickDay={onClickDay}
           day={day}
           startDate={startDate}

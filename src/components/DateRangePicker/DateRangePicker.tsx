@@ -83,8 +83,10 @@ const DateRangePicker = () => {
             flexDirection: 'column'
           }}
         >
-          {quick_ranges['en'].map(range => (
-            <span className="range-label">{range}</span>
+          {quick_ranges['en'].map((range, index) => (
+            <span key={index} className="range-label">
+              {range}
+            </span>
           ))}
         </div>
       </div>
@@ -102,8 +104,8 @@ const DateRangePicker = () => {
               onChange={e => onChangeMonth(e.target.value)}
               value={months['en'][month]}
             >
-              {months['en'].map(el => (
-                <option>{el}</option>
+              {months['en'].map((el, index) => (
+                <option key={index}>{el}</option>
               ))}
             </select>
             <select
