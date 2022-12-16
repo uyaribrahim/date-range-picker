@@ -43,7 +43,7 @@ export const getDayDetails = (params: DayDetailProps) => {
   let date = new Date(
     params.year + '-' + (params.month + 1 + monthStatus) + '-' + dateNumber
   );
-  let timeStamp = new Date(date).setHours(0, 0, 0, 0);
+  let timestamp = new Date(date).setHours(0, 0, 0, 0);
 
   // Return an object with the day's details
 
@@ -51,6 +51,6 @@ export const getDayDetails = (params: DayDetailProps) => {
     dateNumber,
     dayOfWeek,
     monthStatus,
-    timeStamp
+    timestamp
   };
 };

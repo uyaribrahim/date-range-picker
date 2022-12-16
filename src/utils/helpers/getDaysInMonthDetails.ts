@@ -19,7 +19,7 @@ export const getDaysInMonthDetails = (year: number, month: number) => {
     dateNumber: 0,
     dayOfWeek: 0,
     monthStatus: 0,
-    timeStamp: 0
+    timestamp: 0
   };
   let counter = 0;
 

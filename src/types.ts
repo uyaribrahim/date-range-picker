@@ -9,5 +9,5 @@ export interface DaysInMonthDetails {
   dateNumber: number;
   dayOfWeek: number;
   monthStatus: number;
-  timeStamp: number;
+  timestamp: number;
 }
