@@ -5,7 +5,7 @@ import {currMonth, currYear, today} from '../../constants/today';
 import {yearList} from '../../constants/years';
 import {DaysInMonthDetails} from '../../types';
 import {getDaysInMonthDetails} from '../../utils/helpers/getDaysInMonthDetails';
-import Calendar from '../Calendar/Calendar';
+import Calendar from '../Calendar';
 import LeftArrow from '../SVGComponents/LeftArrow';
 import RightArrow from '../SVGComponents/RightArrow';
 import './styles.css';

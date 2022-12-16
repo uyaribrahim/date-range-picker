@@ -22,13 +22,9 @@
 }
 
 .range-label {
-  display: block;
-  outline: 0;
-  line-height: 18px;
   padding: 10px 20px;
   margin-bottom: 0.2rem;
-  text-align: left;
-  font-weight: 600;
+  font-weight: bold;
   border-radius: 5px;
   color: var(--davys-grey);
   cursor: pointer;
@@ -169,6 +165,7 @@
   border-width: 1px;
   border-color: transparent;
   border-style: solid;
+  box-sizing: border-box;
 }
 
 .selected-day {
@@ -180,9 +177,24 @@
   border-color: #22ccce;
 }
 
+.side-elements {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  right: 0;
+}
+.left-element {
+  left: 0;
+}
+
+.fill-side-element-bg {
+  background-color: #d2f4f5;
+}
+
 .date-picker-container {
   display: flex;
   flex: 2;
+  max-width: 400px;
   flex-direction: column;
 }
 
