@@ -9,7 +9,6 @@ export const getDayDetails = (params: DayDetailProps) => {
 
   // Calculate the day of the week (0-6) for the current day
   let dayOfWeek = params.counter % 7;
-  console.log('day of week', dayOfWeek);
 
   // Calculate the previous month and year
   let prevMonth = params.month - 1;
@@ -46,7 +45,6 @@ export const getDayDetails = (params: DayDetailProps) => {
   let timestamp = new Date(date).setHours(0, 0, 0, 0);
 
   // Return an object with the day's details
-
   return {
     dateNumber,
     dayOfWeek,

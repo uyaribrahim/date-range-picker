@@ -9,6 +9,7 @@ export interface ICalendarProps {
   endDate?: number;
   setEndDate: React.Dispatch<React.SetStateAction<number | undefined>>;
   setStartDate: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedQuickRange: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Calendar: FC<ICalendarProps> = ({
@@ -16,12 +17,13 @@ const Calendar: FC<ICalendarProps> = ({
   startDate,
   endDate,
   setEndDate,
-  setStartDate
+  setStartDate,
+  setSelectedQuickRange
 }) => {
   const onClickDay = (timestamp: number) => {
     const start_date = startDate;
     const end_date = endDate;
-
+    setSelectedQuickRange('');
     if (start_date && end_date) {
       setStartDate(timestamp);
       setEndDate(undefined);
