@@ -1,1 +1,1 @@
-export {default} from './DateRangePicker';
+export {default} from './components/DateRangePicker';

@@ -31,6 +31,10 @@
   caret-color: transparent;
 }
 
+.selected-range-label {
+  color: #22ccce;
+}
+
 .month-and-year-container {
   display: flex;
   flex: 1;
