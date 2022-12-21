@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   MS_PER_DAY,
   quicRangeUtils,
@@ -24,6 +24,13 @@ const useDate = () => {
     today.setHours(0, 0, 0, 0)
   );
   const [selectedQuickRange, setSelectedQuickRange] = useState<string>('');
+
+  const [isSelectingStartDate, setIsSelectingStartDate] =
+    useState<boolean>(true);
+
+  useEffect(() => {
+    setIsSelectingStartDate(endDate ? true : false);
+  }, [endDate]);
 
   const month = date.month;
   const year = date.year;
@@ -64,11 +71,10 @@ const useDate = () => {
 
     setStartDate(startTimestamp);
     setEndDate(endTimestamp);
-    setDate(prevState => ({
-      ...prevState,
+    setDate({
       month: new Date(endTimestamp).getMonth(),
       year: new Date(endTimestamp).getFullYear()
-    }));
+    });
   };
 
   const onClickPrevMonth = () => {
@@ -102,19 +108,29 @@ const useDate = () => {
     setDate(prevState => ({...prevState, month: index}));
   };
 
+  const onClickDay = (timestamp: number) => {
+    setSelectedQuickRange('');
+    if ((startDate && endDate) || timestamp < startDate) {
+      setStartDate(timestamp);
+      setEndDate(undefined);
+      return;
+    }
+    setEndDate(timestamp);
+  };
+
   return {
     date,
     startDate,
-    setStartDate,
     endDate,
-    setEndDate,
+    onClickDay,
     selectedQuickRange,
-    setSelectedQuickRange,
     onSelectQuickRange,
     onClickPrevMonth,
     onClickNextMonth,
     onSelectYear,
-    onSelectMonth
+    onSelectMonth,
+    isSelectingStartDate,
+    setIsSelectingStartDate
   };
 };
 

@@ -7,36 +7,15 @@ export interface ICalendarProps {
   daysInMonth: DaysInMonthDetails[];
   startDate: number;
   endDate?: number;
-  setEndDate: React.Dispatch<React.SetStateAction<number | undefined>>;
-  setStartDate: React.Dispatch<React.SetStateAction<number>>;
-  setSelectedQuickRange: React.Dispatch<React.SetStateAction<string>>;
+  onClickDay: (value: number) => void;
 }
 
 const Calendar: FC<ICalendarProps> = ({
   daysInMonth,
   startDate,
   endDate,
-  setEndDate,
-  setStartDate,
-  setSelectedQuickRange
+  onClickDay
 }) => {
-  const onClickDay = (timestamp: number) => {
-    const start_date = startDate;
-    const end_date = endDate;
-    setSelectedQuickRange('');
-    if (start_date && end_date) {
-      setStartDate(timestamp);
-      setEndDate(undefined);
-      return;
-    }
-    if (timestamp < startDate) {
-      setStartDate(timestamp);
-      setEndDate(undefined);
-      return;
-    }
-    setEndDate(timestamp);
-  };
-
   return (
     <div className="calendar">
       <div className="calendar-header ">

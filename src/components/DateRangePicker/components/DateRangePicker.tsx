@@ -7,6 +7,7 @@ import '../styles.css';
 import MonthAndYearPickers from './MonthAndYearPickers';
 import NextPrevButton from './NextPrevButton';
 import QuickRanges from './QuickRanges';
+import SelectedDates from './SelectedDates';
 
 export interface DateRangePickerProps {
   start_date?: Date;
@@ -16,16 +17,16 @@ const DateRangePicker = () => {
   const {
     date,
     startDate,
-    setStartDate,
     endDate,
-    setEndDate,
     selectedQuickRange,
-    setSelectedQuickRange,
+    onClickDay,
     onSelectQuickRange,
     onClickNextMonth,
     onClickPrevMonth,
     onSelectMonth,
-    onSelectYear
+    onSelectYear,
+    isSelectingStartDate,
+    setIsSelectingStartDate
   } = useDate();
 
   const [daysInMonthDetails, setDaysInMonthDetails] = useState<
@@ -74,11 +75,19 @@ const DateRangePicker = () => {
           daysInMonth={daysInMonthDetails}
           startDate={startDate}
           endDate={endDate}
-          setEndDate={setEndDate}
-          setStartDate={setStartDate}
-          setSelectedQuickRange={setSelectedQuickRange}
+          onClickDay={onClickDay}
         />
-        <div style={{display: 'flex', flex: 1}}></div>
+
+        <SelectedDates
+          startDate={startDate}
+          endDate={endDate}
+          isSelectingStartDate={isSelectingStartDate}
+          setIsSelectingStartDate={setIsSelectingStartDate}
+        />
+        <div className="btn-container">
+          <button className="cancel-button">Cancel</button>
+          <button className="apply-button">Apply</button>
+        </div>
       </div>
     </div>
   );
