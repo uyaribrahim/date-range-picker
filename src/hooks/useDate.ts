@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {
   MS_PER_DAY,
   quicRangeUtils,
@@ -27,10 +27,6 @@ const useDate = () => {
 
   const [isSelectingStartDate, setIsSelectingStartDate] =
     useState<boolean>(true);
-
-  useEffect(() => {
-    setIsSelectingStartDate(endDate ? true : false);
-  }, [endDate]);
 
   const month = date.month;
   const year = date.year;
@@ -110,11 +106,21 @@ const useDate = () => {
 
   const onClickDay = (timestamp: number) => {
     setSelectedQuickRange('');
-    if ((startDate && endDate) || timestamp < startDate) {
+
+    if (isSelectingStartDate) {
       setStartDate(timestamp);
-      setEndDate(undefined);
+      setEndDate(timestamp);
+      setIsSelectingStartDate(false);
       return;
     }
+
+    setIsSelectingStartDate(true);
+    if (timestamp < startDate) {
+      setEndDate(startDate);
+      setStartDate(timestamp);
+      return;
+    }
+
     setEndDate(timestamp);
   };
 
