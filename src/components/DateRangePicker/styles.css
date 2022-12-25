@@ -1,17 +1,16 @@
 .module-container {
-  display: flex;
-  width: fit-content;
+  display: block;
+  width: 480px;
   height: fit-content;
   font-family: inherit;
   font-size: medium;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  top: 0;
+  z-index: 10;
   padding-top: 0.6rem;
+  background-color: white;
 }
 
 .quick-ranges-container {
@@ -228,6 +227,7 @@
   border-color: transparent;
   cursor: pointer;
   caret-color: transparent;
+  box-shadow: var(--box-shadow);
 }
 
 .start-end-date span {
@@ -235,16 +235,11 @@
   white-space: nowrap;
 }
 
-.selected-end-date {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: fit-content;
-}
 .btn-container {
   display: flex;
   flex: 0.5;
   padding-right: 0.6rem;
+  margin-top: 0.5rem;
   justify-content: flex-end;
 }
 .apply-button,
@@ -257,12 +252,14 @@
   cursor: pointer;
   background-color: #22ccce;
   color: white;
+  box-shadow: var(--box-shadow);
 }
 
 .start-end-date:hover,
 .apply-button:hover,
 .cancel-button:hover {
-  opacity: 0.6;
+  opacity: 0.7;
+  box-shadow: none;
 }
 
 .cancel-button {
@@ -272,13 +269,20 @@
 }
 
 @media screen and (max-width: 768px) {
+  .module-container {
+    width: 280px;
+  }
   .quick-ranges-container {
     display: none;
   }
 }
-@media screen and (max-width: 280px) {
+@media screen and (max-width: 768px) {
   .start-end-date {
-    margin-top: 0.3rem;
+    margin-top: 0.4rem;
+    width: 100%;
+  }
+  .selected-dates-container {
+    justify-content: center;
   }
 }
 
@@ -293,4 +297,5 @@
   --spanish-gray: #939394ff;
   --dodger-blue: #258dffff;
   --davys-grey: #505050ff;
+  --box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }

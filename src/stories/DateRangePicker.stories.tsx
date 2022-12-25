@@ -1,6 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
 import {DateRangePicker} from '../components';
+import DatePickerButton from '../components/DatePickerButton/DatePickerButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -14,7 +15,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof DateRangePicker> = args => (
-  <DateRangePicker />
+  <DatePickerButton />
 );
 
 export const Primary = Template.bind({});

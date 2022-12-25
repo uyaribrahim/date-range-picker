@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  width: fit-content;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  color: #243645;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.container:hover {
+  opacity: 0.6;
+}
+
+.space {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 25px;
+  user-select: none;
+}
+.date {
+  display: flex;
+  flex: 6;
+  flex-direction: column;
+}
+.date span {
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:root {
+  --azure: #007affff;
+  --gray-x-11-gray: #bababbff;
+  --white: #ffffffff;
+  --white-2: #ffffffff;
+  --white-3: #ffffffff;
+  --platinum: rgb(196, 196, 196);
+  --white-4: #ffffffff;
+  --spanish-gray: #939394ff;
+  --dodger-blue: #258dffff;
+  --davys-grey: #505050ff;
+}

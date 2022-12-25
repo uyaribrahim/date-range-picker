@@ -126,8 +126,11 @@ const useDate = () => {
 
   return {
     date,
+    setDate,
     startDate,
     endDate,
+    setStartDate,
+    setEndDate,
     onClickDay,
     selectedQuickRange,
     onSelectQuickRange,
