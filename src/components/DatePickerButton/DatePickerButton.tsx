@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import useDate from '../../hooks/useDate';
 import DateRangePicker from '../DateRangePicker';
 import '../DateRangePicker/styles.css';
+import Button from './components/Button';
 import './DatePickerButton.style.css';
 
 const DatePickerButton = () => {
@@ -16,26 +17,24 @@ const DatePickerButton = () => {
   const refDiv = useRef<HTMLDivElement>(null);
 
   const handleCancel = () => {
-    console.log('handleCancel');
-    let start_date = new Date(dateRange.start_date);
     dateProps.setStartDate(dateRange.start_date);
     dateProps.setEndDate(dateRange.end_date);
-    dateProps.setDate({
-      month: start_date.getMonth(),
-      year: start_date.getFullYear()
-    });
+    setDateToStartDate(dateRange.start_date);
     setShowCalendar(false);
   };
 
   const handleApply = (start_date: number, end_date: number | undefined) => {
-    let startDate = new Date(start_date);
-
-    dateProps.setDate({
-      month: startDate.getMonth(),
-      year: startDate.getFullYear()
-    });
+    setDateToStartDate(start_date);
     setDateRange({start_date: start_date, end_date: end_date});
     setShowCalendar(false);
+  };
+
+  const setDateToStartDate = (startDate: number) => {
+    let _startDate = new Date(startDate);
+    dateProps.setDate({
+      month: _startDate.getMonth(),
+      year: _startDate.getFullYear()
+    });
   };
 
   useEffect(() => {
@@ -59,20 +58,11 @@ const DatePickerButton = () => {
         width: 'fit-content'
       }}
     >
-      <div className="container" onClick={() => setShowCalendar(true)}>
-        <div className="date">
-          <span>
-            {new Date(dateRange.start_date).toLocaleDateString('en-EN')}
-          </span>
-        </div>
-        <div className="space">-</div>
-        <div className="date">
-          <span>
-            {' '}
-            {new Date(dateRange.end_date).toLocaleDateString('en-EN')}
-          </span>
-        </div>
-      </div>
+      <Button
+        setShowCalendar={setShowCalendar}
+        start_date={dateProps.startDate}
+        end_date={dateProps.endDate}
+      />
       {showCalendar ? (
         <DateRangePicker
           handleCancel={handleCancel}
