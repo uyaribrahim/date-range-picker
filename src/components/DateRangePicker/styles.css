@@ -4,10 +4,9 @@
   height: fit-content;
   font-family: inherit;
   font-size: medium;
-  border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 0px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   position: absolute;
-  top: 0;
   z-index: 10;
   padding-top: 0.6rem;
   background-color: white;
@@ -218,6 +217,7 @@
   width: 40%;
   flex-direction: column;
   background-color: #f2f2f2a2;
+  color: var(--davys-grey);
   padding: 0.5rem 0.8rem;
   border-radius: 100px;
   min-width: 100px;
@@ -250,6 +250,7 @@
   align-items: center;
   border-radius: 100px;
   cursor: pointer;
+  font-family: inherit;
   background-color: #22ccce;
   color: white;
   box-shadow: var(--box-shadow);
@@ -275,8 +276,6 @@
   .quick-ranges-container {
     display: none;
   }
-}
-@media screen and (max-width: 768px) {
   .start-end-date {
     margin-top: 0.4rem;
     width: 100%;

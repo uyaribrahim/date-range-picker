@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  width: fit-content;
+  width: 180px;
   padding: 0.5rem 1rem 0.5rem 1rem;
   cursor: pointer;
   user-select: none;
@@ -31,6 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 :root {

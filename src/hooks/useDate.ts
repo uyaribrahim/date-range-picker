@@ -1,27 +1,27 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import {
   MS_PER_DAY,
   quicRangeUtils,
   todayTimestamp
 } from '../components/DateRangePicker/quick-range-utils';
-import {months} from '../constants/months';
-import {currMonth, currYear, today} from '../constants/today';
+import { months } from '../constants/months';
+import { currMonth, currYear } from '../constants/today';
 
 export type DateState = {
   month: number;
   year: number;
 };
 
-const useDate = () => {
+const useDate = (ranges: {startDate: Date; endDate: Date}) => {
   const [date, setDate] = useState<DateState>({
     month: currMonth,
     year: currYear
   });
   const [startDate, setStartDate] = useState<number>(
-    today.setHours(0, 0, 0, 0)
+    ranges.startDate.setHours(0, 0, 0, 0)
   );
   const [endDate, setEndDate] = useState<number | undefined>(
-    today.setHours(0, 0, 0, 0)
+    ranges.endDate.setHours(0, 0, 0, 0)
   );
   const [selectedQuickRange, setSelectedQuickRange] = useState<string>('');
 

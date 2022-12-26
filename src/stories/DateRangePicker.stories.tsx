@@ -1,5 +1,5 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import React from 'react';
+import React, {useState} from 'react';
 import {DateRangePicker} from '../components';
 import DatePickerButton from '../components/DatePickerButton/DatePickerButton';
 
@@ -14,10 +14,14 @@ export default {
 } as ComponentMeta<typeof DateRangePicker>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DateRangePicker> = args => (
-  <DatePickerButton />
-);
+const Template: ComponentStory<typeof DateRangePicker> = args => {
+  const [ranges, setRanges] = useState({
+    startDate: new Date(2022, 11, 12),
+    endDate: new Date()
+  });
 
+  return <DatePickerButton ranges={ranges} onChangeRange={setRanges} />;
+};
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 // Primary.args = {
