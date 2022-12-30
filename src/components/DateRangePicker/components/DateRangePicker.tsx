@@ -1,157 +1,89 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
-import {DateState} from '../../../hooks/useDate';
-import {DaysInMonthDetails} from '../../../types';
-import {getDaysInMonthDetails} from '../../../utils/helpers/getDaysInMonthDetails';
-import Calendar from '../../Calendar';
-import '../styles.css';
-import MonthAndYearPickers from './MonthAndYearPickers';
-import NextPrevButton from './NextPrevButton';
-import QuickRanges from './QuickRanges';
-import SelectedDates from './SelectedDates';
-
+import useDate from '../../../hooks/useDate';
+import PickerContainer from '../../PickerContainer';
+import '../DateRangePicker.style.css';
+import Button from './Button';
 interface IDateRangePickerProps {
-  handleCancel: () => void;
-  handleApply: (start_date: number, end_date: number | undefined) => void;
-  position: boolean;
-  date: DateState;
-  startDate: number;
-  endDate: number | undefined;
-  selectedQuickRange: string;
-  onClickDay: (timestamp: number) => void;
-  onSelectQuickRange: (range: string) => void;
-  onClickNextMonth: () => void;
-  onClickPrevMonth: () => void;
-  onSelectMonth: (month: string) => void;
-  onSelectYear: (year: number) => void;
-  isSelectingStartDate: boolean;
-  setIsSelectingStartDate: React.Dispatch<React.SetStateAction<boolean>>;
+  range: {startDate: Date; endDate: Date};
+  onChangeDateRange: React.Dispatch<
+    React.SetStateAction<{startDate: Date; endDate: Date}>
+  >;
 }
 
 const DateRangePicker: FC<IDateRangePickerProps> = ({
-  handleCancel,
-  handleApply,
-  position,
-  ...props
+  range,
+  onChangeDateRange
 }) => {
-  const [daysInMonthDetails, setDaysInMonthDetails] = useState<
-    DaysInMonthDetails[]
-  >([]);
-  const refDatePickerContainer = useRef<HTMLDivElement>(null);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
+  const [isButtonCloserToLeftSide, setIsButtonCloserToLeftSide] =
+    useState<boolean>(false);
+  const dateProps = useDate(range);
+  const [dateRange, setDateRange] = useState<any>({
+    start_date: dateProps.startDate,
+    end_date: dateProps.endDate
+  });
+  const refDiv = useRef<HTMLDivElement>(null);
 
-  const {
-    date,
-    startDate,
-    endDate,
-    selectedQuickRange,
-    onClickDay,
-    onSelectQuickRange,
-    onClickNextMonth,
-    onClickPrevMonth,
-    onSelectMonth,
-    onSelectYear,
-    isSelectingStartDate,
-    setIsSelectingStartDate
-  } = props;
+  const handleCancel = () => {
+    dateProps.setStartDate(dateRange.start_date);
+    dateProps.setEndDate(dateRange.end_date);
+    setDateToStartDate(dateRange.start_date);
+    setShowCalendar(false);
+  };
+  const handleApply = (start_date: number, end_date: number | undefined) => {
+    setDateToStartDate(start_date);
+    setDateRange({start_date: start_date, end_date: end_date});
+    setShowCalendar(false);
+    onChangeDateRange({
+      startDate: new Date(start_date),
+      endDate: new Date(end_date!!)
+    });
+  };
+  const setDateToStartDate = (startDate: number) => {
+    let _startDate = new Date(startDate);
+    dateProps.setDate({
+      month: _startDate.getMonth(),
+      year: _startDate.getFullYear()
+    });
+  };
 
   useEffect(() => {
-    let days_in_month_details = getDaysInMonthDetails(date.year, date.month);
-    setDaysInMonthDetails(days_in_month_details);
-  }, [date]);
+    const div = refDiv.current;
+    const rect = div!!.getBoundingClientRect();
+    const center = rect.left + rect.width / 2;
+    const screenCenter = window.innerWidth / 2;
 
-  useEffect(() => {
-    const hideOnEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleCancel();
-      }
-    };
-
-    const hideOnClickOutside = (e: MouseEvent) => {
-      if (
-        refDatePickerContainer.current &&
-        !refDatePickerContainer.current.contains(e.target as Node)
-      ) {
-        handleCancel();
-      }
-    };
-
-    document.addEventListener('keydown', hideOnEscape, true);
-    document.addEventListener('click', hideOnClickOutside, true);
-
-    return () => {
-      document.removeEventListener('keydown', hideOnEscape, true);
-      document.removeEventListener('click', hideOnClickOutside, true);
-    };
+    if (center < screenCenter) {
+      setIsButtonCloserToLeftSide(true);
+    } else {
+      setIsButtonCloserToLeftSide(false);
+    }
   }, []);
-
-  const handlePrevMonthClick = () => onClickPrevMonth();
-
-  const handleNextMonthClick = () => onClickNextMonth();
-
-  const handleYearPicker = (year: number) => onSelectYear(year);
-
-  const handleMonthPicker = (month: string) => onSelectMonth(month);
-
-  const handleQuickRanges = (range: string) => onSelectQuickRange(range);
-
-  const containerStyle = position ? {left: 0} : {right: 0};
-
+  console.log(showCalendar);
   return (
     <div
-      className="module-container"
-      ref={refDatePickerContainer}
-      style={{...containerStyle}}
+      ref={refDiv}
+      style={{
+        position: 'relative',
+        width: 'fit-content'
+      }}
     >
-      <SelectedDates
-        startDate={startDate}
-        endDate={endDate}
-        isSelectingStartDate={isSelectingStartDate}
-        setIsSelectingStartDate={setIsSelectingStartDate}
+      <Button
+        setShowCalendar={setShowCalendar}
+        showCalendar={showCalendar}
+        start_date={dateRange.start_date}
+        end_date={dateRange.end_date}
       />
-      <div style={{display: 'flex'}}>
-        <QuickRanges
-          selectedQuickRange={selectedQuickRange}
-          handleQuickRanges={handleQuickRanges}
+      {showCalendar ? (
+        <PickerContainer
+          handleCancel={handleCancel}
+          handleApply={handleApply}
+          position={isButtonCloserToLeftSide}
+          {...dateProps}
         />
-        <div className="date-picker-container">
-          <div className="month-and-year-container">
-            <NextPrevButton
-              direction={'prev'}
-              handleClick={handlePrevMonthClick}
-            />
-
-            <MonthAndYearPickers
-              month={date.month}
-              year={date.year}
-              handleMonthPicker={handleMonthPicker}
-              handleYearPicker={handleYearPicker}
-            />
-
-            <NextPrevButton
-              direction="next"
-              handleClick={handleNextMonthClick}
-            />
-          </div>
-
-          <Calendar
-            daysInMonth={daysInMonthDetails}
-            startDate={startDate}
-            endDate={endDate}
-            onClickDay={onClickDay}
-          />
-
-          <div className="btn-container">
-            <button className="cancel-button" onClick={handleCancel}>
-              Cancel
-            </button>
-            <button
-              className="apply-button"
-              onClick={() => handleApply(startDate, endDate)}
-            >
-              Apply
-            </button>
-          </div>
-        </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
