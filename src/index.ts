@@ -1,3 +1,3 @@
-import {PickerContainer} from './components';
+import {DateRangePicker} from './components';
 
-export {PickerContainer};
+export {DateRangePicker};

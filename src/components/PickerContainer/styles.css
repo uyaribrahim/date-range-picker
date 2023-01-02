@@ -28,6 +28,7 @@
   color: var(--davys-grey);
   cursor: pointer;
   caret-color: transparent;
+  text-align: left;
 }
 
 .selected-range-label {

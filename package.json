@@ -1,6 +1,6 @@
 {
   "name": "@uyaribrahim/date-range-picker",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A React component for choosing date ranges.",
   "main": "dist/main.js",
   "source": "src/index.ts",
@@ -45,6 +45,5 @@
   },
   "peerDependencies": {
     "react": "^18.2.0"
-  },
-  "dependencies": {}
+  }
 }
