@@ -2,6 +2,13 @@
   "name": "@uyaribrahim/date-range-picker",
   "version": "0.1.2",
   "description": "A React component for choosing date ranges.",
+  "keywords": [
+    "react",
+    "date range picker",
+    "calendar",
+    "date picker",
+    "date range"
+  ],
   "main": "dist/main.js",
   "source": "src/index.ts",
   "module": "dist/module.js",
